@@ -44,7 +44,7 @@ const candidatosData = [
       { icon: "fa-solid fa-store", text: "Cero costo en licencias para nuevos emprendedores el primer año" }
     ],
     imgCard: "img/zabaleta.png",
-    imgDetail: "img/zabaleta.jpg"
+    imgDetail: "img/zabaleta.png"
   },
     {
     id: 'cerlin',
