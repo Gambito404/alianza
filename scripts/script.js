@@ -131,20 +131,36 @@ const eventosData = [
 
 // ========== INICIALIZACIÓN ==========
 
+// Valor que identifica la versión actual del sitio. Debe cambiarse
+// únicamente cuando los archivos estáticos (imágenes, CSS, JS) sean
+// modificados en el repositorio. Puede ser un número de versión semántica,
+// fecha de despliegue o hash de commit.
+const APP_VERSION = '1.0.0';
+
+// trackea la versión usada en la última recarga de imágenes para evitar
+// solicitar ficheros innecesariamente si no ha cambiado.
+let lastReloadVersion = '';
+
 /**
- * Recarga todas las imágenes de la página agregando un parámetro de
- * caché único para forzar su descarga. Guarda la URL original en
- * data-original-src para evitar encadenar query strings.
+ * Recarga imágenes utilizando APP_VERSION como cache‑buster. Si la versión
+ * coincide con la última vez que se ejecutó la función, no hace nada.
  */
 function reloadImages() {
+    if (lastReloadVersion === APP_VERSION) {
+        // ya estamos en la versión correcta, no hay que recargar nada
+        return;
+    }
+
     document.querySelectorAll('img').forEach(img => {
         const orig = img.getAttribute('data-original-src') || img.src;
         if (!img.getAttribute('data-original-src')) {
             img.setAttribute('data-original-src', orig);
         }
         const separator = orig.includes('?') ? '&' : '?';
-        img.src = orig + separator + 'cb=' + Date.now();
+        img.src = orig + separator + 'v=' + APP_VERSION;
     });
+
+    lastReloadVersion = APP_VERSION;
 }
 
 document.addEventListener('DOMContentLoaded', function() {
