@@ -84,7 +84,7 @@ const candidatosData = [
 // Datos de las ubicaciones
 const ubicacionesData = [
   {
-    zona: "Casa de Campaña Central",
+    /*zona: "Casa de Campaña Central",
     // Link corto: El sistema detectará que es corto y mostrará un botón "Abrir Mapa"
     mapa: "https://maps.app.goo.gl/r7no8QfGxSfK9cK19",
     horario: "Lunes a Sábado: 09:00 - 19:00",
@@ -98,13 +98,13 @@ const ubicacionesData = [
     horario: "Lunes a Viernes: 10:00 - 18:00",
     telefono: "+591 4 450 5678",
     direccion: "Av. Petrolera, Km 3, acera norte."
-  }
+  */}
 ];
 
 // Datos de eventos
 const eventosData = [
   {
-    dia: "5",
+    /*dia: "5",
     mes: "MAR",
     titulo: "Encuentro Comunitario",
     hora: "10:00 – 12:30",
@@ -126,7 +126,7 @@ const eventosData = [
     hora: "18:00 – 20:00",
     lugar: "Teatro Municipal",
     tags: ["Debate2026", "PropuestasClaras"]
-  }
+  */}
 ];
 
 // ========== INICIALIZACIÓN ==========
