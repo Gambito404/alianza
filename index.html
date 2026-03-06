@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Portal Institucional – Alcaldía Cochabamba 2026</title>
+  <link rel="stylesheet" href="styles/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+<body class="loading">
+
+<!-- SPLASH SCREEN -->
+<div id="splashScreen" class="splash-screen">
+  <div class="splash-content">
+    <img src="img/logo.png" alt="Logo Alcaldía Cochabamba" class="splash-logo">
+    <h1>Unidos por el futuro de Cochabamba</h1>
+    <p>Conoce las propuestas y los candidatos que trabajarán por una ciudad más próspera, segura y unida.</p>
+    <button id="enterButton" class="btn-primary">
+      Ingresar al portal <i class="fas fa-arrow-right"></i>
+    </button>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header class="header" id="header">
+  <div class="header-container">
+    <div class="logo">
+      <img src="img/logo.png" alt="Logo Alcaldía Cochabamba">
+      <span class="logo-text">Alcaldía Cochabamba</span>
+    </div>
+    
+    <!-- Menú Desktop -->
+    <nav class="desktop-nav">
+      <a href="#candidatos" class="active">Candidatos</a>
+      <a href="#casas">Casas</a>
+      <a href="#eventos">Eventos</a>
+    </nav>
+
+    <!-- Botón menú móvil -->
+    <button class="menu-btn" id="menuBtn" aria-label="Menú">
+      <i class="fas fa-bars"></i>
+    </button>
+  </div>
+</header>
+
+<!-- SIDEBAR MÓVIL -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <img src="img/logo.png" alt="Logo">
+    <button class="close-sidebar" id="closeSidebar">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+  <nav class="sidebar-nav">
+    <a href="#candidatos" class="active"><i class="fas fa-users"></i> Candidatos</a>
+    <a href="#casas"><i class="fas fa-map-marker-alt"></i> Casas</a>
+    <a href="#eventos"><i class="fas fa-calendar-alt"></i> Eventos</a>
+  </nav>
+</aside>
+
+<div class="overlay" id="overlay"></div>
+
+<main class="main-content">
+
+<!-- CANDIDATOS SECTION -->
+<section id="candidatos" class="section">
+  <div class="container">
+    <div class="section-header">
+      <h2>Candidatos 2026</h2>
+      <p class="section-description">Conoce a los candidatos que liderarán el cambio en Cochabamba</p>
+    </div>
+
+    <div class="card-grid" id="candidatosGrid">
+      <!-- Los candidatos se cargarán dinámicamente con JS -->
+    </div>
+  </div>
+</section>
+
+<!-- CASAS DE CAMPAÑA -->
+<section id="casas" class="section light">
+  <div class="container">
+    <div class="section-header">
+      <h2>Casas de Campaña</h2>
+      <p class="section-description">Encuentra los puntos de encuentro en tu zona</p>
+    </div>
+
+    <div class="locations-grid" id="locationsGrid">
+      <!-- Las ubicaciones se cargarán dinámicamente -->
+    </div>
+  </div>
+</section>
+
+<!-- EVENTOS -->
+<section id="eventos" class="section">
+  <div class="container">
+    <div class="section-header">
+      <h2>Próximos Eventos</h2>
+      <p class="section-description">Participa y sé parte del cambio</p>
+    </div>
+
+    <div class="events-grid" id="eventsGrid">
+      <!-- Los eventos se cargarán dinámicamente -->
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- PÁGINA DE DETALLE DEL CANDIDATO -->
+<div class="detail-page" id="detailPage">
+  <!-- El contenido se carga dinámicamente -->
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-simple">
+      <div class="footer-brand">
+        <img src="img/logo.png" alt="Logo" class="footer-logo">
+        <p>&copy; 2026 Alcaldía de Cochabamba. Todos los derechos reservados.</p>
+      </div>
+      <div class="footer-social">
+        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="scripts/script.js"></script>
+</body>
+</html>
