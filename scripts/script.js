@@ -60,7 +60,7 @@ const candidatosData = [
       { icon: "fa-solid fa-users-gear", text: "Presupuesto participativo directo para juntas vecinales" }
     ],
     imgCard: "img/cerlin.png", // Asegúrate de tener esta imagen
-    imgDetail: "img/cerlin-detalle.png"
+    imgDetail: "img/cerlin.png"
   },
   {
     id: 'paco',
@@ -130,6 +130,23 @@ const eventosData = [
 ];
 
 // ========== INICIALIZACIÓN ==========
+
+/**
+ * Recarga todas las imágenes de la página agregando un parámetro de
+ * caché único para forzar su descarga. Guarda la URL original en
+ * data-original-src para evitar encadenar query strings.
+ */
+function reloadImages() {
+    document.querySelectorAll('img').forEach(img => {
+        const orig = img.getAttribute('data-original-src') || img.src;
+        if (!img.getAttribute('data-original-src')) {
+            img.setAttribute('data-original-src', orig);
+        }
+        const separator = orig.includes('?') ? '&' : '?';
+        img.src = orig + separator + 'cb=' + Date.now();
+    });
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     const splashScreen = document.getElementById('splashScreen');
     const enterButton = document.getElementById('enterButton');
@@ -139,6 +156,9 @@ document.addEventListener('DOMContentLoaded', function() {
             splashScreen.classList.add('hidden');
         }
         document.body.classList.remove('loading');
+
+        // Force image refresh to bust cache and avoid manual Ctrl+F5
+        reloadImages();
 
         // Initialize AOS now that the content is visible
         AOS.init({
