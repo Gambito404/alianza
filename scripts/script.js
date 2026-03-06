@@ -233,6 +233,11 @@ function renderCandidatos() {
  * Analiza la URL de Google Maps y decide si se puede incrustar o si debe ser un link externo.
  */
 function formatMapUrl(url) {
+  if (!url) {
+    // sin URL no podemos mostrar nada
+    return { type: 'none', url: '' };
+  }
+
   // 1. Si ya es un embed válido
   if (url.includes('output=embed') || url.includes('/embed')) {
     return { type: 'embed', url: url };
@@ -272,6 +277,11 @@ function renderUbicaciones() {
   if (!grid) return;
   
   grid.innerHTML = ubicacionesData.map(ubicacion => {
+    if (!ubicacion.mapa) {
+      // omitimos tarjetas sin enlace válido
+      return '';
+    }
+
     const mapInfo = formatMapUrl(ubicacion.mapa);
     let mapContent;
 
