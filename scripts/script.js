@@ -1,11 +1,5 @@
-// Elementos del DOM
-const sidebar = document.getElementById("sidebar");
-const overlay = document.getElementById("overlay");
-const menuBtn = document.getElementById("menuBtn");
-const closeSidebar = document.getElementById("closeSidebar");
-const header = document.getElementById("header");
-const mainContent = document.querySelector('.main-content');
-const detailPage = document.getElementById('detailPage');
+// Elementos del DOM — se inicializan en DOMContentLoaded
+let sidebar, overlay, menuBtn, closeSidebarBtn, header, mainContent, detailPage;
 
 // Estado de la aplicación
 let currentCandidato = null;
@@ -135,7 +129,7 @@ const eventosData = [
 // únicamente cuando los archivos estáticos (imágenes, CSS, JS) sean
 // modificados en el repositorio. Puede ser un número de versión semántica,
 // fecha de despliegue o hash de commit.
-const APP_VERSION = '1.0.1';
+const APP_VERSION = '1.0.0';
 
 // trackea la versión usada en la última recarga de imágenes para evitar
 // solicitar ficheros innecesariamente si no ha cambiado.
@@ -164,6 +158,15 @@ function reloadImages() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Capturar elementos ahora que el DOM está listo
+    sidebar       = document.getElementById("sidebar");
+    overlay       = document.getElementById("overlay");
+    menuBtn       = document.getElementById("menuBtn");
+    closeSidebarBtn = document.getElementById("closeSidebar");
+    header        = document.getElementById("header");
+    mainContent   = document.querySelector('.main-content');
+    detailPage    = document.getElementById('detailPage');
+
     const splashScreen = document.getElementById('splashScreen');
     const enterButton = document.getElementById('enterButton');
 
@@ -172,6 +175,10 @@ document.addEventListener('DOMContentLoaded', function() {
             splashScreen.classList.add('hidden');
         }
         document.body.classList.remove('loading');
+
+        // Ahora que el header es visible, registrar eventos e inicializar
+        addBackButton();
+        initEventListeners();
 
         // Force image refresh to bust cache and avoid manual Ctrl+F5
         reloadImages();
@@ -196,9 +203,7 @@ document.addEventListener('DOMContentLoaded', function() {
     renderCandidatos();
     renderUbicaciones();
     renderEventos();
-    initEventListeners();
     checkActiveSection();
-    addBackButton();
 });
 
 // ========== RENDERIZADO DE CANDIDATOS ==========
@@ -220,7 +225,7 @@ function renderCandidatos() {
           <p class="card-experience">${candidato.experience}</p>
         </div>
         <div class="card-footer">
-          <span class="card-action" onclick="showCandidatoDetail('${candidato.id}')">
+          <span class="card-action" onclick="showCandidatoDetail(event, '${candidato.id}')">
             Ver perfil <i class="fas fa-arrow-right"></i>
           </span>
         </div>
@@ -341,10 +346,10 @@ function renderEventos() {
 }
 
 // ========== VISTA DE DETALLE (CON IMAGEN ESPECÍFICA) ==========
-function showCandidatoDetail(candidatoId) {
-  if (event) {
-    event.preventDefault();
-    event.stopPropagation();
+function showCandidatoDetail(e, candidatoId) {
+  if (e) {
+    e.preventDefault();
+    e.stopPropagation();
   }
   
   const candidato = candidatosData.find(c => c.id === candidatoId);
@@ -354,12 +359,6 @@ function showCandidatoDetail(candidatoId) {
   
   // Actualizar el header
   header.classList.add('detail-view');
-  
-  // Actualizar el botón de volver
-  const backBtn = document.querySelector('.btn-back');
-  if (backBtn) {
-    backBtn.innerHTML = '<i class="fas fa-arrow-left"></i> Volver a candidatos';
-  }
   
   // Renderizar la página de detalle (con imagen de detalle)
   renderDetailPage(candidato);
@@ -403,7 +402,7 @@ function renderDetailPage(candidato) {
             <ul class="detail-proposals">
               ${candidato.proposals.map(proposal => `
                 <li>
-                  <i class="fas ${proposal.icon}"></i>
+                  <i class="${proposal.icon}"></i>
                   ${proposal.text}
                 </li>
               `).join('')}
@@ -436,25 +435,25 @@ function hideDetailView() {
 }
 
 function addBackButton() {
-  const nav = document.querySelector('.desktop-nav');
-  const headerContainer = document.querySelector('.header-container');
-  
+  // Si ya existe el botón, no lo creamos de nuevo
   if (document.querySelector('.btn-back')) return;
+  
+  const headerContainer = document.querySelector('.header-container');
+  if (!headerContainer) return;
   
   const backBtn = document.createElement('button');
   backBtn.className = 'btn-back';
   backBtn.innerHTML = '<i class="fas fa-arrow-left"></i> Volver';
-  backBtn.onclick = hideDetailView;
+  backBtn.addEventListener('click', hideDetailView);
   
-  if (headerContainer) {
-    headerContainer.insertBefore(backBtn, nav);
-  }
+  // Insertar el botón al final del header-container
+  headerContainer.appendChild(backBtn);
 }
 
 // ========== SIDEBAR ==========
 function initEventListeners() {
-  menuBtn.addEventListener("click", openSidebar);
-  if (closeSidebar) closeSidebar.addEventListener("click", closeSidebarMenu);
+  if (menuBtn) menuBtn.addEventListener("click", openSidebar);
+  if (closeSidebarBtn) closeSidebarBtn.addEventListener("click", closeSidebarMenu);
   if (overlay) overlay.addEventListener("click", closeSidebarMenu);
   
   document.addEventListener("keydown", (e) => {
