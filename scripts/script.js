@@ -135,7 +135,7 @@ const eventosData = [
 // únicamente cuando los archivos estáticos (imágenes, CSS, JS) sean
 // modificados en el repositorio. Puede ser un número de versión semántica,
 // fecha de despliegue o hash de commit.
-const APP_VERSION = '1.0.0';
+const APP_VERSION = '1.0.1';
 
 // trackea la versión usada en la última recarga de imágenes para evitar
 // solicitar ficheros innecesariamente si no ha cambiado.
