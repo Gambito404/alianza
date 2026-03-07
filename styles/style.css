@@ -1385,3 +1385,50 @@ body.modal-open {
     font-size: 0.9rem;
   }
 }
+/* Botón volver (para vista detalle) */
+.btn-back {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  color: var(--dark);
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding: 8px 16px;
+  border-radius: 40px;
+  transition: var(--transition);
+}
+
+.btn-back i {
+  font-size: 0.8rem;
+  transition: transform 0.3s ease;
+}
+
+.btn-back:hover {
+  background: var(--light);
+}
+
+.btn-back:hover i {
+  transform: translateX(-3px);
+}
+
+/* Mostrar el botón solo cuando estamos en vista de detalle */
+.header.detail-view .btn-back {
+  display: flex;
+}
+
+/* Ocultar otros elementos cuando estamos en vista de detalle */
+.header.detail-view .desktop-nav,
+.header.detail-view .menu-btn {
+  display: none;
+}
+
+/* Ajuste para móvil */
+@media (max-width: 1024px) {
+  .btn-back {
+    font-size: 0.8rem;
+    padding: 6px 12px;
+  }
+}
